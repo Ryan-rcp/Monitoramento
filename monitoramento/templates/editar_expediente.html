@@ -1,0 +1,82 @@
+{% extends 'base-dashboard.html' %}
+
+{% load static %}
+
+{% block 'titulo' %}Login{% endblock %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/base-dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+<!-- <link rel="stylesheet" href="{% static 'css/cadastro.css' %}"> -->
+<link rel="stylesheet" href="{% static 'css/cadastro_funcionario.css' %}">
+<link rel="stylesheet" href="{% static 'css/lista_funcionario.css' %}">
+{% endblock %}
+
+
+{% block 'span' %}Cadastro{% endblock %}
+
+
+{% block 'body' %}
+<div class="container-page">
+    <div class="title">
+        <button id="btn-voltar" onclick="voltar();"><i class='bx bx-left-arrow-alt'></i></button>
+        <span>Atualizar Expediente</span>
+    </div>
+    <div class="content">
+        <div class="row">
+            <div class="col-12 m-auto">
+                <div class="card border-0 shadow">
+                    <div class="card-body">
+                        <form method="POST" action="{% url 'editar_expediente' expediente.id %}"
+                            enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="inputBox">
+                                        {{ form.descricao }}
+                                        <label for="{{ form.descricao.id_for_label }}">Descrição</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group m-4">
+                                        <legend class="col-form-label">Dias da Semana</legend>
+                                        {{ form.dias_da_semana }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="row mt-4">
+                                        <legend class="col-form-label px-4">Horários</legend>
+                                        <div class="inputBox">
+                                            {{ form.entrada_1 }}
+                                            <label for="{{ form.entrada_1.id_for_label}}">Entrada (manhã)</label>
+                                        </div>
+                                        <div class="inputBox">
+                                            {{ form.saida_1 }}
+                                            <label for="{{ form.saida_1.id_for_label}}">Saída (manhã)</label>
+                                        </div>
+                                        <div class="inputBox">
+                                            {{ form.entrada_2 }}
+                                            <label for="{{ form.entrada_2.id_for_label}}">Entrada (tarde)</label>
+                                        </div>
+                                        <div class="inputBox">
+                                            {{ form.saida_2 }}
+                                            <label for="{{ form.saida_2.id_for_label}}">Saída (tarde)</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-4 m-auto">
+                                <button type="submit" class="btn btn-primary">Atualizar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

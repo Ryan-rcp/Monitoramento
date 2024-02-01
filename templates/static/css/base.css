@@ -1,0 +1,148 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --body-color: #E4E9F7;
+    --sidebar-color: #FFF;
+    --primary-color: #695CFE;
+    --primary-color-light: #F6F5FF;
+    --toggle-color: #DDD;
+    --text-color: #707070;
+
+    /* ====== Transition ====== */
+    --tran-03: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.4s ease;
+    --tran-05: all 0.5s ease;
+}
+
+body {
+    background-color: var(--body-color);
+  }
+
+.container {
+    min-height: calc(100vh - 165px); /* Altura da janela - altura do cabeçalho e rodapé */
+    padding-bottom: 165px; /* Altura do rodapé */
+}
+
+.navbar {
+  top: 0;
+  width: 100%;
+  left: 0;
+  background-color: var(--sidebar-color);
+  padding: 15px 30px;
+  /* box-shadow: 0 0 2px var(--text-color); */
+}
+
+.inputBox{
+	width: 100%;
+	position: relative;
+	padding: 5px 20px;
+}
+
+.inputBox input{
+	width: 100%;
+	transition: 0.5s linear;
+}
+
+.inputBox input:focus,
+.inputBox input:valid{
+	padding: 5px 10px;
+	margin-top: 10px;
+}
+
+.inputBox label{
+	position: absolute;
+	top:0;
+	font-size: 18px;
+	/* font-weight: bold; */
+    color: var(--text-color);
+	margin: 10px 20px;
+	transition: 0.2s linear;
+    
+}
+
+legend{
+    font-size: 18px;    
+    color: var(--text-color);
+}
+
+.inputBox .data ~ label,
+.inputBox .setor ~ label,
+.inputBox .hora ~ label,
+.inputBox .func ~ label{
+    margin: 0 7px;
+    font-size: 15px; 
+    background: #fff;   
+}
+
+.inputBox input:focus ~ label,
+.inputBox input:valid ~ label,
+.inputBox textarea:focus ~ label,
+.inputBox textarea:valid ~ label{
+	margin: 0 4px;
+    font-size: 15px;
+    background: #fff;
+}
+
+
+.footer-distributed {
+    background-color: #e4deeb;
+    box-sizing: border-box;
+    width: 100%;
+    text-align: left;
+    font: bold 16px sans-serif;
+    padding: 50px 50px 60px 50px;
+    position: relative;
+    margin-top: -165px; /* Altura do rodapé (negativa) para compensar o espaço ocupado pelo rodapé */
+    clear: both;
+}
+
+.footer-distributed .footer-left, .footer-distributed .footer-right {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.footer-distributed .footer-left {
+    width: 50%;
+}
+
+.footer-distributed .footer-right {
+    width: 50%;
+}
+
+.footer-distributed .footer-company-about {
+    line-height: 20px;
+    color: #404346;
+    font-size: 13px;
+    font-weight: normal;
+    margin: 0;
+}
+
+.footer-distributed .footer-company-about span {
+    display: block;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+
+.footer-links a:hover {
+    color: #3F71EA;
+}
+
+
+@media (max-width: 880px) {
+    .footer-distributed .footer-left, .footer-distributed .footer-center, .footer-distributed .footer-right {
+        display: block;
+        width: 100%;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+    .footer-distributed .footer-center i {
+        margin-left: 0;
+    }
+}      

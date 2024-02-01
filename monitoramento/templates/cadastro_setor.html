@@ -1,0 +1,121 @@
+{% extends 'base-dashboard.html' %}
+
+{% load static %}
+
+{% block 'titulo' %}Login{% endblock %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/base-dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+<!-- <link rel="stylesheet" href="{% static 'css/cadastro.css' %}"> -->
+<link rel="stylesheet" href="{% static 'css/cadastro_funcionario.css' %}">
+<link rel="stylesheet" href="{% static 'css/lista_funcionario.css' %}">
+{% endblock %}
+
+
+{% block 'span' %}Cadastro{% endblock %}
+
+
+{% block 'body' %}
+<div class="container-page">
+    <div class="title">
+        <button id="btn-voltar" onclick="voltar();"><i class='bx bx-left-arrow-alt'></i></button>
+        <span>Cadastro de Setor</span>
+    </div>
+    <div class="content">
+        <div class="row">
+            <div class="col-12 m-auto">
+                <div class="card border-0 shadow">
+                    <div class="card-body">
+                        <form method="POST" action="{% url 'cadastro_setor' %}" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="inputBox">
+                                        {{ form.nome_setor }}
+                                        <label for="{{ form.nome_setor.id_for_label }}">Nome</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="inputBox">
+                                        {{ form.descricao_setor }}
+                                        <label for="{{ form.descricao_setor.id_for_label }}">Descrição</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-4 m-auto">
+                                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="content_box">
+        <div class="title">
+            <span>Cadastro de Funcionário</span>
+        </div>
+        <div class="content">
+            <form method="POST" action="{% url 'cadastro_funcionarios' %}">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="picture col-md-4">
+                        <i class='bx bx-user-circle'></i>
+                        <button ></button>
+                    </div>
+        
+                    <div class=" input-group col">
+                        <div class="row">
+                            <div class="col-md">
+                                {{form.matricula_funcionario}}
+                                {% if form.matricula_funcionario.errors %}
+                                    <div class="alert alert-danger">
+                                        {{ form.matricula_funcionario.errors }}
+                                    </div>
+                                {% endif %}
+                                {{form.nome_funcionario}}
+                                {{form.sobrenome_funcionario}}
+                                {{form.cpf_funcionario}}
+                                {% if form.cpf_funcionario.errors %}
+                                    <div class="alert alert-danger">
+                                        {{ form.cpf_funcionario.errors }}
+                                    </div>
+                                {% endif %}
+                                {{form.cargo_funcionario}}
+                                {{form.data_nascimento_funcionario}}
+                            </div>
+                            <div class="col-md ">
+                                {{form.nome_setor}}
+                                {{form.telefone_funcionario}}
+                                {{form.email_funcionario}}
+                                {% if form.email_funcionario.errors %}
+                                <div class="alert alert-danger">
+                                    {{ form.email_funcionario.errors }}
+                                </div>
+                                {% endif %}
+                                {{form.senha_funcionario}}
+                                {{form.confirmar_senha_funcionario}}
+                                {% if form.confirmar_senha_funcionario.errors %}
+                                <div class="alert alert-danger">
+                                    {{ form.confirmar_senha_funcionario.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+                            
+                        </div>    
+                        
+                    </div> 
+                </div>
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+
+            </form>
+        </div>       
+    </div> -->
+</div>
+
+
+{% endblock %}

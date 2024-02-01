@@ -1,0 +1,152 @@
+{% extends 'base-dashboard.html' %}
+
+{% load static %}
+
+{% block 'titulo' %}Login{% endblock %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/base-dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+<!-- <link rel="stylesheet" href="{% static 'css/cadastro.css' %}"> -->
+<link rel="stylesheet" href="{% static 'css/lista_funcionario.css' %}">
+
+{% endblock %}
+
+
+{% block 'span' %}Cadastro{% endblock %}
+
+
+{% block 'body' %}
+<div class="container-page">
+    <div class="title">
+        <button id="btn-voltar" onclick="voltar();"><i class='bx bx-left-arrow-alt'></i></button>
+        <span>{{ funcionario.nome_funcionario }} {{ funcionario.sobrenome_funcionario }}</span>
+    </div>
+    <div class="content">
+        <div class="row mb-3">
+            <div class="col-lg-2 col-sm-12">
+                <div class="inputBox px-0">
+                    <input type="date" id="data-inicial" class="form-control">
+                    <label for="data-inicial">Data inicial:</label>
+                </div>
+            </div>
+            <div class="col-lg-2 col-sm-12">
+                <div class="inputBox px-0">
+                    <input type="date" id="data-final" class="form-control">
+                    <label for="data-final">Data final:</label>
+                </div>
+            </div>
+            <div class="col-lg-2 col-sm-12 d-flex align-items-center pt-2">
+                <button onclick="atualizarGrafico(); atualizarTabela()" class="btn btn-primary">Filtrar</button>
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-6 m-auto">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5>Rendimento Real</h5>
+                        <canvas id="rendimento"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 m-auto">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5>Previsão</h5>
+                        <canvas id="previsao"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 m-auto mt-5">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5>Atividades Agendadas</h5>
+                        <canvas id="agendada"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-5">
+            <div class="card-body">
+                <h5 style="color:#707070;">Atividades Concluídas</h5>
+                <div class="row mt-5">
+                    <table class="table table-striped table-bordered" id="tabela-rendimento">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Rendimento Esperado</th>
+                                <th>Rendimento Real</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+        
+                </div>
+                <div class="row mt-5">
+                    <table class="table table-striped table-bordered" id="tabela-atv-concluida">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Atividade</th>
+                                <th>Tempo Entrega</th>
+                                <th>Tempo Conclusão</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+        
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-5">
+            <div class="card-body">
+                <h5 style="color:#707070;">Atividades Agendadas</h5>
+                <div class="row mt-5">
+                    <table class="table table-striped table-bordered" id="tabela-atv-agendada">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Atividade</th>
+                                <th>Status</th>
+                                <th>Previsão</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+    window.onload = function() {
+        var dataAtual = new Date();
+        var primeiroDiaDoMes = new Date(dataAtual.getFullYear(), dataAtual.getMonth(), 1);
+
+        // Formatar as datas para o formato yyyy-mm-dd
+        var dataInicialFormatada = primeiroDiaDoMes.toISOString().split('T')[0];
+        var dataFinalFormatada = dataAtual.toISOString().split('T')[0];
+
+        // Definir os valores dos campos de data
+        document.getElementById('data-inicial').value = dataInicialFormatada;
+        document.getElementById('data-final').value = dataFinalFormatada;
+    }
+
+</script>
+
+
+{% endblock %}
+

@@ -1,0 +1,12 @@
+{% autoescape off %}
+Olá {{ user.nome_representante }},
+
+Obrigado por se cadastrar no nosso site. Por favor, clique no link abaixo para confirmar seu email e ativar sua conta:
+
+http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+
+Se você não solicitou este cadastro, por favor ignore este email.
+
+Atenciosamente,
+Equipe do Seu Site
+{% endautoescape %}

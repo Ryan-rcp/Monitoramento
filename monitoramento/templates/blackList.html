@@ -1,0 +1,128 @@
+{% extends 'base-dashboard.html' %}
+
+{% load static %}
+
+{% block 'titulo' %}Login{% endblock %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/base-dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+<!-- <link rel="stylesheet" href="{% static 'css/cadastro.css' %}"> -->
+<link rel="stylesheet" href="{% static 'css/cadastro_funcionario.css' %}">
+<link rel="stylesheet" href="{% static 'css/lista_funcionario.css' %}">
+{% endblock %}
+
+
+{% block 'span' %}Cadastro{% endblock %}
+
+
+{% block 'body' %}
+<div class="container-page">
+    <div class="title">
+        <button id="btn-voltar" onclick="voltar();"><i class='bx bx-left-arrow-alt'></i></button>
+        <span>Lista Negra</span>
+    </div>
+    <div class="content">
+        <div class="row">
+            <div class="col-12 m-auto">
+                <div class="card border-0 shadow">
+                    <div class="card-body">
+                        <div class="title">
+                            <span>Sites</span>
+                        </div>
+                        <form method="POST" action="#" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-lg-2 col-sm-12">
+                                    <div class="inputBox">
+                                        {{ site_form.nome_site }}
+                                        <label for="{{ site_form.nome_site.id_for_label }}">Nome</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-12">
+                                    <div class="inputBox">
+                                        {{ site_form.url }}
+                                        <label for="{{ site_form.url.id_for_label }}">URL</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 col-lg-2 mt-2 d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-primary">Adicionar</button>
+                                </div>
+                            </div>
+                        </form>
+
+
+                        <div class="row mt-3">
+                            <div class="col-md-12 d-flex justify-content-center mt-3">
+                                <table class="table table-striped table-bordered" id="tabela-blacklist-site">
+                                    <thead>
+                                        <tr>
+                                            <th>Nome</th>
+                                            <th>URL</th>
+                                            <th>Opções</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow mt-3">
+                    <div class="card-body">
+                        <div class="title">
+                            <span>Aplicativos</span>
+                        </div>
+                        <form method="POST" action="#" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-lg-2 col-sm-12">
+                                    <div class="inputBox">
+                                        {{ app_form.nome_app }}
+                                        <label for="{{ app_form.nome_app.id_for_label }}">Nome</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-12">
+                                    <div class="inputBox">
+                                        {{ app_form.executavel }}
+                                        <label for="{{ app_form.executavel.id_for_label }}">Executável</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 col-lg-2 mt-2 d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-primary">Adicionar</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="row mt-3">
+                            <div class="col-md-12 d-flex justify-content-center">
+                                <table class="table table-striped table-bordered" id="tabela-blacklist-app">
+                                    <thead>
+                                        <tr>
+                                            <th>Nome</th>
+                                            <th>Executável</th>
+                                            <th>Opções</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

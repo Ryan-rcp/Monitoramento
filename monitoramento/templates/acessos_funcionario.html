@@ -1,0 +1,118 @@
+{% extends 'base-dashboard.html' %}
+
+{% load static %}
+
+{% block 'titulo' %}Login{% endblock %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/base-dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+<!-- <link rel="stylesheet" href="{% static 'css/cadastro.css' %}"> -->
+<link rel="stylesheet" href="{% static 'css/lista_funcionario.css' %}">
+
+{% endblock %}
+
+
+{% block 'span' %}Cadastro{% endblock %}
+
+
+{% block 'body' %}
+<div class="container-page">
+    <div class="title">
+        <button id="btn-voltar" onclick="voltar();"><i class='bx bx-left-arrow-alt'></i></button>
+        <span>{{ funcionario.nome_funcionario }} {{ funcionario.sobrenome_funcionario }}</span>
+    </div>
+    <div class="content">
+        <div class="row mb-3">
+            <div class="col-lg-2 col-sm-12">
+                <div class="inputBox px-0">
+                    <input type="date" id="data-inicial" class="form-control">
+                    <label for="data-inicial">Data inicial:</label>
+                </div>
+            </div>
+            <div class="col-lg-2 col-sm-12">
+                <div class="inputBox px-0">
+                    <input type="date" id="data-final" class="form-control">
+                    <label for="data-final">Data final:</label>
+                </div>
+            </div>
+            <div class="col-lg-2 col-sm-12 d-flex align-items-center pt-2">
+                <button onclick="atualizarGrafico(); atualizarTabela()" class="btn btn-primary">Filtrar</button>
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-6 m-auto">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5>Aplicativos</h5>
+                        <canvas id="apps"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 m-auto">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5>Sites</h5>
+                        <canvas id="sites"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <table class="table table-striped table-bordered" id="tabela-acesso-aplicativo">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Nome</th>
+                        <th>Horário</th>
+                        <th>Tempo Execução</th>
+                        <th>Tempo Execução Exp.</th>
+                        <th>Acesso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+        </div>
+        <div class="row mt-5">
+            <table class="table table-striped table-bordered" id="tabela-acesso-site">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Nome</th>
+                        <th>URL</th>
+                        <th>Horário</th>
+                        <th>Acesso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+    window.onload = function() {
+    var dataAtual = new Date();
+
+    // Formatar a data para o formato yyyy-mm-dd
+    var dataFormatada = dataAtual.toISOString().split('T')[0];
+
+    // Definir os valores dos campos de data
+    document.getElementById('data-inicial').value = dataFormatada;
+    document.getElementById('data-final').value = dataFormatada;
+}
+
+</script>
+
+
+{% endblock %}
+

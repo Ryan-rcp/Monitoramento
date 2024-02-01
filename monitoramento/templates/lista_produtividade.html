@@ -1,0 +1,56 @@
+{% extends 'base-dashboard.html' %}
+
+{% load static %}
+
+{% block 'titulo' %}Login{% endblock %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/base-dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+<!-- <link rel="stylesheet" href="{% static 'css/cadastro.css' %}"> -->
+<link rel="stylesheet" href="{% static 'css/lista_funcionario.css' %}">
+{% endblock %}
+
+
+{% block 'span' %}Cadastro{% endblock %}
+
+
+{% block 'body' %}
+<div class="container-page">
+    <div class="title">
+        <button id="btn-voltar" onclick="voltar();"><i class='bx bx-left-arrow-alt'></i></button>
+        <span>Produtividade</span>
+    </div>
+    <div class="content">
+        <div class="row">
+            <table class="table table-striped table-bordered" id="tabela-listar-acessos">
+                <thead>
+                    <tr>
+                        <th>Matrícula</th>
+                        <th>Nome</th>
+                        <th>Setor</th>
+                        <th>Opções</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for funcionario in funcionarios %}
+                    <tr>
+                        <td>{{ funcionario.matricula_funcionario }}</td>
+                        <td>{{ funcionario.nome_funcionario }}</td>
+                        <td>{{ funcionario.setor.nome_setor }}</td>
+                        <td>
+                            <!-- Links para editar e excluir o funcionário -->
+                            <a href="{% url 'produtividade_funcionario' funcionario.id %}" class="btn btn-primary btn-sm"
+                                title="Visualizar">Visualizar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

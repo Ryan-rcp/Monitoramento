@@ -1,0 +1,70 @@
+{% extends 'base-dashboard.html' %}
+
+{% load static %}
+
+{% block 'titulo' %}Login{% endblock %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/base-dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+<!-- <link rel="stylesheet" href="{% static 'css/cadastro.css' %}"> -->
+<link rel="stylesheet" href="{% static 'css/lista_funcionario.css' %}">
+{% endblock %}
+
+
+{% block 'span' %}Atividades{% endblock %}
+
+
+{% block 'body' %}
+<div class="container-page">
+    <div class="title">
+        <button id="btn-voltar" onclick="voltar();"><i class='bx bx-left-arrow-alt'></i></button>
+        <span>Atividades</span>
+    </div>
+    <div class="content">
+        <div class="row">
+            <div class="d-flex mb-4">
+                <a href="{% url 'cadastro_atividade' %}" class="btn btn-primary"><i class='bx bxs-plus-circle'></i>Cadastrar</a>
+            </div>
+        </div>
+        <table class="table table-striped table-bordered" id="tabela-listar-atividades">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Data</th>
+                    <th>Tempo de Entrega</th>
+                    <th>Funcionário</th>
+                    <th>Status</th>
+                    <th>Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for atv in atividade %}
+                <tr>
+                    <td style="width: 100px;">{{ atv.nome_atividade }}</td>
+                    <td title="{{ atv.descricao_atividade }}">{{ atv.descricao_atividade|truncatechars:50 }}</td>
+                    <td>{{ atv.data_atividade|date:"d-m-Y" }}</td>
+                    <td>{{ atv.tempo_entrega }}:00</td>
+                    <td>{{ atv.funcionario.nome_funcionario }} {{ atv.funcionario.sobrenome_funcionario }}</td>
+                    <td>{{ atv.status_atividade }}</td>
+                    <td>
+                        <!-- Links para editar e excluir o funcionário -->
+                        <a href="{% url 'editar_atividade' atv.id %}" class="btn btn-warning btn-sm" title="Editar"><i class='bx bx-pencil'></i></i></a>
+                        <a href="{% url 'excluir_atividade' atv.id %}" class="btn btn-danger btn-sm btn-excluir"
+                            title="Excluir" data-id="{{ atv.id }}"
+                            data-excluir-url="{% url 'excluir_atividade' atv.id %}">
+                            <i class='bx bx-trash'></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+    </div>
+</div>
+
+
+{% endblock %}

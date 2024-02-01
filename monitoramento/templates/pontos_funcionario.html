@@ -1,0 +1,149 @@
+{% extends 'base-dashboard.html' %}
+
+{% load static %}
+
+{% block 'titulo' %}Login{% endblock %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/base-dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+<!-- <link rel="stylesheet" href="{% static 'css/cadastro.css' %}"> -->
+<link rel="stylesheet" href="{% static 'css/lista_funcionario.css' %}">
+{% endblock %}
+
+
+{% block 'span' %}Cadastro{% endblock %}
+
+
+{% block 'body' %}
+<div class="container-page">
+    <div class="title">
+        <button id="btn-voltar" onclick="voltar();"><i class='bx bx-left-arrow-alt'></i></button>
+        <span>{{ funcionario.nome_funcionario }} {{ funcionario.sobrenome_funcionario }}</span>
+    </div>
+    <div class="content">
+        <div class="row mb-3">
+            <div class="col-lg-2 col-sm-12">
+                <div class="inputBox px-0">
+                    <input type="date" id="data-inicial" class="form-control">
+                    <label for="data-inicial">Data inicial:</label>
+                </div>
+            </div>
+            <div class="col-lg-2 col-sm-12">
+                <div class="inputBox px-0">
+                    <input type="date" id="data-final" class="form-control">
+                    <label for="data-final">Data final:</label>
+                </div>
+            </div>
+            <div class="col-lg-2 col-sm-12 d-flex align-items-center pt-2">
+                <button onclick="atualizarGrafico(); atualizarTabela()" class="btn btn-primary">Filtrar</button>
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-6 m-auto">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5>Horas Trabalhadas</h5>
+                        <canvas id="horas_trabalhadas"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 m-auto">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5>Horas Extras</h5>
+                        <canvas id="horas_extras"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mt-3">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5>Horas Pendentes</h5>
+                        <canvas id="horas_pendentes"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mt-3">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5>Inatividade</h5>
+                        <canvas id="tempo_inativo"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <table class="table table-striped table-bordered" id="tabela-registro-ponto">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Entrada (manhã)</th>
+                        <th>Saída (manhã)</th>
+                        <th>Entrada (tarde)</th>
+                        <th>Saída (tarde)</th>
+                        <th>Horas Trabalhadas</th>
+                        <th>Horas Extras</th>
+                        <th>Horas Pendentes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>TOTAL</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+            </table>
+
+        </div>
+
+        <div class="row mt-5">
+            <table class="table table-striped table-bordered" id="tabela-inatividade">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Hora</th>
+                        <th>Tempo Inativo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+    window.onload = function() {
+    var dataAtual = new Date();
+    var primeiroDiaDoMes = new Date(dataAtual.getFullYear(), dataAtual.getMonth(), 1);
+
+    // Formatar as datas para o formato yyyy-mm-dd
+    var dataInicialFormatada = primeiroDiaDoMes.toISOString().split('T')[0];
+    var dataFinalFormatada = dataAtual.toISOString().split('T')[0];
+
+    // Definir os valores dos campos de data
+    document.getElementById('data-inicial').value = dataInicialFormatada;
+    document.getElementById('data-final').value = dataFinalFormatada;
+}
+</script>
+{% endblock %}
+
+
+
+

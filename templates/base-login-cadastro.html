@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+ {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    {% block 'head' %}{% endblock %}
+    <title>{% block 'title' %}{% endblock %}</title>
+</head>
+
+<body>
+    <header class=" navbar d-flex flex-wrap align-items-center justify-content-center justify-content-md-between border-bottom">
+        <div class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <div class="d-inline-flex link-body-emphasis text-decoration-none">
+            <a href=""><img src="{% static 'images/logo.png' %}" class="bi me-2" width="50px"><span class="fs-4">Monitorando VC</span></a>
+            </div>
+        </div>
+        <div class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 ">
+            <a href="{% url 'login' %}" type="button" class="btn btn-outline-primary me-2">Login</a>
+            <a href="{% url 'cadastro_representante' %}" type="button" class="btn btn-primary">Sign-up</a>
+        </div>
+    </header>
+    
+    {% block 'body' %}{% endblock %}
+    
+    <footer class="footer-distributed row">
+        <div class="footer-left ">
+            <a href=""><img src="{% static 'images/logo.png' %}" class="bi me-2" width="50px"><span class="fs-4">Monitorando VC</span></a>
+            
+            <p class="footer-name">Copyright © 2023 <strong>Monitorando VC</strong> Todos os direitos reservados.</p>
+        </div>
+    
+        <div class="footer-right ">
+            <p class="footer-company-about">
+                <span>Sobre nós</span>
+                Nossa missão é oferecer aos gerentes as ferramentas necessárias para acompanhar o <strong>desempenho e a produtividade</strong> de seus funcionários,
+                promovendo um ambiente de trabalho eficiente e colaborativo.    
+            </p>
+        </div>
+    </footer>
+    
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="{% static 'js/jquery.mask.min.js' %}"></script>
+    <script src="{% static 'js/mascara.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

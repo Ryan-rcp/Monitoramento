@@ -1,0 +1,71 @@
+{% extends 'base-dashboard.html' %}
+
+{% load static %}
+
+{% block 'titulo' %}Login{% endblock %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/base-dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+<!-- <link rel="stylesheet" href="{% static 'css/cadastro.css' %}"> -->
+<link rel="stylesheet" href="{% static 'css/cadastro_funcionario.css' %}">
+<link rel="stylesheet" href="{% static 'css/lista_funcionario.css' %}">
+{% endblock %}
+
+
+{% block 'span' %}Cadastro{% endblock %}
+
+
+{% block 'body' %}
+<div class="container-page">
+    <div class="title">
+        <button id="btn-voltar" onclick="voltar();"><i class='bx bx-left-arrow-alt'></i></button>
+        <span>Atualizar Setor</span>
+    </div>
+    <div class="content">
+        <div class="row">
+            <div class="col-12 m-auto">
+                <div class="card border-0 shadow">
+                    <div class="card-body">
+                        <form method="POST" action="{% url 'editar_setor' setor.id %}" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="inputBox">
+                                        {{ form.nome_setor }}
+                                        <label for="{{ form.nome_setor.id_for_label }}">Nome</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="inputBox">
+                                        {{ form.descricao_setor }}
+                                        <label for="{{ form.descricao_setor.id_for_label }}">Descrição</label>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <div class="form-check">
+                                            {{ form.ativo }}
+                                            <label class="form-check-label" for="{{ form.ativo.id_for_label }}">Ativar/Desativar</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-4 m-auto">
+                                <button type="submit" class="btn btn-primary">Atualizar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

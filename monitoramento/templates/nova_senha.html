@@ -1,0 +1,42 @@
+{% extends 'base-login-cadastro.html' %}
+{% load static %} <!--Carregar arquivos estaticos -->
+{% block 'titulo' %}Esqueci a senha{% endblock %}
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+{% endblock %}
+
+{% block 'body' %}
+<div class="container d-flex mb-5">
+    
+    <section style="width: 100%;" class="d-flex justify-content-center align-items-center">
+        <div style="width: 100%;">
+            <div class="row" >
+                <div class="col-12 col-sm-8 col-md-6 m-auto">
+                    <div class="card border-0 shadow">
+                        <div class="card-body ">
+                            <form method="post" action="">
+                                {% csrf_token %}
+                                <h4 style="color:#404346">Informe a nova senha</h4>
+                                <div class="inputBox">
+                                    <input type="{{ form.new_password1.field.widget.input_type }}" name="{{ form.new_password1.name }}" class="form-control" id="{{ form.new_password1.id_for_label }}">
+                                    <label for="{{ form.new_password1.id_for_label }}">Nova Senha</label>
+                                </div>
+                                <div class="inputBox">
+                                    <input type="{{ form.new_password2.field.widget.input_type }}" name="{{ form.new_password2.name }}" class="form-control" id="{{ form.new_password2.id_for_label }}">
+                                    <label for="{{ form.new_password2.id_for_label }}">Confirmar nova senha</label>
+                                </div>
+
+                                <!-- Botão de envio -->
+                                <div class="inputBox">
+                                    <button type="submit" class="btn btn-primary">Redefinir Senha</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>   
+                </div>
+            </div>
+        </div>
+    </section>
+    
+</div>
+{% endblock %}

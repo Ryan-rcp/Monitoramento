@@ -1,0 +1,73 @@
+.container-page {
+    height: 100%;
+    width: calc(100% - 270px);
+    left: 270px;
+    background: var(--sidebar-color);
+    top: 95px;
+    position: absolute;
+    overflow-x: hidden;
+    padding: 40px;
+    border-radius: 20px;
+    transition: var(--tran-05);
+}
+
+.container-page table {
+    width: 100% !important;
+}
+
+.sidebar.close~.container-page {
+    left: 105px;
+    width: calc(100% - 105px);
+}
+
+body.dark .container-page {
+    background: var(--sidebar-color);
+}
+
+.content_box {
+    padding: 20px;
+    width: 100%;
+}
+
+.title {
+    margin-bottom: 25px;
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.title button{
+    color: var(--text-color);
+    border: none;
+    background: var(--sidebar-color);
+}
+
+.content .table {
+    color: var(--text-color);
+}
+
+
+.dataTables_filter,
+.dataTables_length,
+.dataTables_length select option,
+.form-select,
+.dataTables_info,
+.pagination {
+    color: var(--text-color);
+}
+
+
+.dataTables_filter input,
+.dataTables_length select,
+.previous,
+.next {
+    background: var(--primary-color-light);
+}
+
+
+@media screen and (max-width: 768px) {
+    .sidebar.close~.container-page {
+        left: 0;
+        width: 100%;
+    }
+}

@@ -1,0 +1,181 @@
+{% extends 'base-dashboard.html' %}
+
+{% load static %}
+
+{% block 'titulo' %}Login{% endblock %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/base-dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+<!-- <link rel="stylesheet" href="{% static 'css/cadastro.css' %}"> -->
+<link rel="stylesheet" href="{% static 'css/cadastro_funcionario.css' %}">
+<link rel="stylesheet" href="{% static 'css/lista_funcionario.css' %}">
+{% endblock %}
+
+
+{% block 'span' %}Cadastro{% endblock %}
+
+
+{% block 'body' %}
+<div class="container-page">
+    <div class="title">
+        <button id="btn-voltar" onclick="voltar();"><i class='bx bx-left-arrow-alt'></i></button>
+        <span>Atualizar Funcionário</span>
+    </div>
+    <div class="content">
+        <div class="row">
+            <div class="col-md-3 m-auto ">
+                <div class="card">
+                    <div class="card-body d-flex align-items-center justify-content-center">
+                        {% if funcionario.avatar %}
+                            <img id="avatar-preview" src="{{funcionario.avatar.url}}" alt="" style="display: block;">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-8 m-auto">
+                <div class="card border-0 shadow">
+                    <div class="card-body">
+                        <form method="POST" action="{% url 'editar_funcionario' funcionario.id %}"
+                            enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="inputBox">
+                                        {{ form.matricula_funcionario }}
+                                        <label for="{{ form.matricula_funcionario.id_for_label }}">Matricula</label>
+                                        {% if form.matricula_funcionario.errors %}
+                                        <div style="color: red;">
+                                            {{ form.matricula_funcionario.errors }}
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="inputBox">
+                                        {{ form.nome_funcionario }}
+                                        <label for="{{ form.nome_funcionario.id_for_label }}">Nome</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="inputBox">
+                                        {{ form.sobrenome_funcionario }}
+                                        <label for="{{ form.sobrenome_funcionario.id_for_label }}">Sobrenome</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4 ">
+                                    <div class="inputBox">
+                                        {{ form.cpf_funcionario }}
+                                        <label for="{{ form.cpf_funcionario.id_for_label }}">CPF</label>
+                                        {% if form.cpf_funcionario.errors %}
+                                        <div style="color: red;">
+                                            {{ form.cpf_funcionario.errors }}
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="inputBox">
+                                        {{ form.data_nascimento_funcionario }}
+                                        <label for="{{ form.data_nascimento_funcionario.id_for_label }}">Data de
+                                            Nascimento</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 ">
+                                    <div class="inputBox">
+                                        {{ form.cargo_funcionario }}
+                                        <label for="{{ form.cargo_funcionario.id_for_label }}">Cargo</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="inputBox">
+                                        {{ form.nome_setor }}
+                                        <label for="{{ form.nome_setor.id_for_label }}">Setor</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="inputBox">
+                                        {{ form.horario }}
+                                        <label for="{{ form.horario.id_for_label }}">Horário</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4 ">
+                                    <div class="inputBox">
+                                        {{ form.telefone_funcionario }}
+                                        <label for="{{ form.telefone_funcionario.id_for_label }}">Telefone</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="inputBox">
+                                        {{ form.email_funcionario }}
+                                        <label for="{{ form.email_funcionario.id_for_label }}">E-mail</label>
+                                        {% if form.email_funcionario.errors %}
+                                        <div style="color: red;">
+                                            {{ form.email_funcionario.errors }}
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-4 ">
+                                    <div class="inputBox">
+                                        {{ form.senha_funcionario }}
+                                        <label for="{{ form.senha_funcionario.id_for_label }}">Senha</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="inputBox">
+                                        {{ form.confirmar_senha_funcionario }}
+                                        <label for="{{ form.confirmar_senha_funcionario.id_for_label }}">Confirmar
+                                            Senha</label>
+                                        {% if form.confirmar_senha_funcionario.errors %}
+                                            <div style="color: red;">
+                                                {{ form.confirmar_senha_funcionario.errors }}
+                                            </div>
+                                        {% endif %}
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 m-auto">
+                                    <div class="form-group">
+                                        <div class="form-check">
+                                            {{ form.ferias }}
+                                            <label class="form-check-label" for="{{ form.ferias.id_for_label }}">Férias</label>
+                                        </div>
+                                        <div class="form-check">
+                                            {{ form.ativo }}
+                                            <label class="form-check-label" for="{{ form.ativo.id_for_label }}">Ativar/Desativar</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 ">
+                                    <div class="form-group">
+                                        {{ form.avatar }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-4 m-auto">
+                                <button type="submit" class="btn btn-primary">Atualizar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

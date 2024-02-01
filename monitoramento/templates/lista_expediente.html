@@ -1,0 +1,72 @@
+{% extends 'base-dashboard.html' %}
+
+{% load static %}
+
+{% block 'titulo' %}Login{% endblock %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/base-dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+<!-- <link rel="stylesheet" href="{% static 'css/cadastro.css' %}"> -->
+<link rel="stylesheet" href="{% static 'css/lista_funcionario.css' %}">
+{% endblock %}
+
+
+{% block 'span' %}Cadastro{% endblock %}
+
+
+{% block 'body' %}
+<div class="container-page">
+    <div class="title">
+        <button id="btn-voltar" onclick="voltar();"><i class='bx bx-left-arrow-alt'></i></button>
+        <span>Horários</span>
+    </div>
+    <div class="content">
+        <div class="row">
+            <div class="d-flex mb-4">
+                <a href="{% url 'cadastro_expediente' %}" class="btn btn-primary"><i
+                        class='bx bxs-plus-circle'></i>Cadastrar</a>
+            </div>
+        </div>
+        <table class="table table-striped table-bordered" id="tabela-listar-expediente">
+            <thead>
+                <tr>
+                    <th>Descrição</th>
+                    <th>Dias</th>
+                    <th>Horario Entrada(manhã)</th>
+                    <th>Horario Saída(manhã)</th>
+                    <th>Horario Entrada(tarde)</th>
+                    <th>Horario Saída(tarde)</th>
+                    <th>Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for exp in expediente %}
+                <tr>
+                    <td>{{ exp.descricao_expediente }}</td>
+                    <td>{{ exp.dia_da_semana }}</td>
+                    <td>{{ exp.entrada_1 }}</td>
+                    <td>{{ exp.saida_1 }}</td>
+                    <td>{{ exp.entrada_2 }}</td>
+                    <td>{{ exp.saida_2 }}</td>
+                    <td>
+                        <!-- Links para editar e excluir o funcionário -->
+                        <a href="{% url 'editar_expediente' exp.id %}" class="btn btn-warning btn-sm" title="Editar"><i
+                                class='bx bx-pencil'></i></i></a>
+                        <a href="{% url 'excluir_expediente' exp.id %}" class="btn btn-danger btn-sm btn-excluir"
+                            title="Excluir" data-id="{{ exp.id }}"
+                            data-excluir-url="{% url 'excluir_expediente' exp.id %}">
+                            <i class='bx bx-trash'></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+{% endblock %}

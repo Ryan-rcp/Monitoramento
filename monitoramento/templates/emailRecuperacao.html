@@ -1,0 +1,3 @@
+{% autoescape off %}
+Clique aqui para redefinir sua senha: {{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}
+{% endautoescape %}
